@@ -10,6 +10,7 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { LinkIcon, LogOut } from 'lucide-react'
 
 
 
@@ -17,7 +18,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 const Header = () => {
 
     const navigate = useNavigate()
-    const user = true;
+    const user = false;
     return (
         <nav className='flex justify-between items-center p-4'>
             <Link to='/'>
@@ -28,19 +29,23 @@ const Header = () => {
                     <Button onClick={() => navigate('/auth')} >Login</Button>
                     : (
                         <DropdownMenu>
-                            <DropdownMenuTrigger>
+                            <DropdownMenuTrigger className='w-10 rounded-full overflow-hidden'>
                                 <Avatar>
                                     <AvatarImage src="/scott.png" />
-                                    <AvatarFallback>CN</AvatarFallback>
+                                    <AvatarFallback>AS</AvatarFallback>
                                 </Avatar>
-                            </DropdownMenuTrigger>
+                            </DropdownMenuTrigger >
                             <DropdownMenuContent>
-                                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                                <DropdownMenuLabel>Anish Shetty</DropdownMenuLabel>
                                 <DropdownMenuSeparator />
-                                <DropdownMenuItem>Profile</DropdownMenuItem>
-                                <DropdownMenuItem>Billing</DropdownMenuItem>
-                                <DropdownMenuItem>Team</DropdownMenuItem>
-                                <DropdownMenuItem>Subscription</DropdownMenuItem>
+                                <DropdownMenuItem>
+                                    <LinkIcon className='mr-2 h-4 w-4' />
+                                    <span> My Links</span>
+                                </DropdownMenuItem>
+                                <DropdownMenuItem className='text-red-400'>
+                                    <LogOut className='mr-2 h-4 w-4' />
+                                    <span>Logout</span>
+                                </DropdownMenuItem>
                             </DropdownMenuContent>
                         </DropdownMenu>
 
