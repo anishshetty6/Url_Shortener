@@ -10,7 +10,7 @@ const Auth = () => {
   const [searchParams] = useSearchParams();
 
   return (
-    <div className=' mt-24 flex flex-col items-center gap-10'>
+    <div className=' mt-18 flex flex-col items-center gap-10'>
       <h1 className='text-4xl font-extrabold'>
         {searchParams.get('createNew')
           ? "Wait!Let's get you logged in first 😊"
