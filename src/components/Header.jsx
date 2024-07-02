@@ -60,7 +60,7 @@ const Header = () => {
                     )
                 }
             </div>
-            {loading && <div>Loading...</div>}
+            {loading && <div>Logging out...</div>}
         </nav>
     )
 }
