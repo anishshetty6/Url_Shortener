@@ -14,6 +14,7 @@ import { LinkIcon, LogOut } from 'lucide-react'
 import { urlState } from '@/context'
 import useFetch from '@/hooks/useFetch'
 import { logout } from '@/db/apiAuth'
+import { BarLoader } from 'react-spinners'
 
 const Header = () => {
 
@@ -62,7 +63,7 @@ const Header = () => {
                 }
             </div>
         </nav>
-            {loading && <div>Logging out...</div>}
+            {loading && <BarLoader className='mb-4' width={"100%"} color='red'/>}
         </>
     )
 }
