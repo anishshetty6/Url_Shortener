@@ -24,6 +24,7 @@ const Header = () => {
     const { loading, fn: fnLogout } = useFetch(logout);
 
     return (
+        <>
         <nav className='flex justify-between items-center p-4'>
             <Link to='/'>
                 <img src='/logo.png' className='h-16' alt='logo' />
@@ -60,8 +61,9 @@ const Header = () => {
                     )
                 }
             </div>
-            {loading && <div>Logging out...</div>}
         </nav>
+            {loading && <div>Logging out...</div>}
+        </>
     )
 }
 
