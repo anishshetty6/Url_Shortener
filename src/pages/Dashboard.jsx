@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BarLoader } from 'react-spinners'
 import {
   Card,
@@ -7,9 +7,12 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 
 
 const Dashboard = () => {
+  const[searchQuery,setSearchQuery]=useState("");
+
   return (
     <div className='flex flex-col gap-8'>
       {true && <BarLoader width={"100%"} color="#36d7b7" />}
@@ -36,6 +39,11 @@ const Dashboard = () => {
           My Links
         </h1>
         <Button>Create Link</Button>
+      </div>
+      <div className='relative'>
+        <Input type='text' placeholder='Filter Links' value ={searchQuery} 
+        onChange={(e)=>setSearchQuery(e.target.value)}
+        />
       </div>
 
     </div>
