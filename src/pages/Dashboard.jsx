@@ -8,10 +8,16 @@ import {
 } from "@/components/ui/card"
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import useFetch from '@/hooks/useFetch'
+import { getUrls } from '@/db/apiUrls'
+import { urlState } from '@/context'
 
 
 const Dashboard = () => {
   const[searchQuery,setSearchQuery]=useState("");
+
+  const {user}=urlState();
+  useFetch(getUrls,user.id);
 
   return (
     <div className='flex flex-col gap-8'>
