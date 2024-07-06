@@ -11,13 +11,15 @@ import { Input } from '@/components/ui/input'
 import useFetch from '@/hooks/useFetch'
 import { getUrls } from '@/db/apiUrls'
 import { urlState } from '@/context'
+import { Filter } from 'lucide-react'
+import Error from '@/components/Error'
 
 
 const Dashboard = () => {
   const[searchQuery,setSearchQuery]=useState("");
 
   const {user}=urlState();
-  useFetch(getUrls,user.id);
+  const {loading,error,data:urls,fn:fnUrls}=useFetch(getUrls,user?.id);
 
   return (
     <div className='flex flex-col gap-8'>
@@ -50,8 +52,9 @@ const Dashboard = () => {
         <Input type='text' placeholder='Filter Links' value ={searchQuery} 
         onChange={(e)=>setSearchQuery(e.target.value)}
         />
+        <Filter className='absolute top-2 right-2 p-1'/>
       </div>
-
+      <Error message={error.message}/>
     </div>
   )
 }
