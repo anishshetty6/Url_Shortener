@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BarLoader } from 'react-spinners'
 import {
   Card,
@@ -13,34 +13,48 @@ import { getUrls } from '@/db/apiUrls'
 import { urlState } from '@/context'
 import { Filter } from 'lucide-react'
 import Error from '@/components/Error'
+import { getClicksForUrl } from '@/db/apiClicks'
+
 
 
 const Dashboard = () => {
-  const[searchQuery,setSearchQuery]=useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const {user}=urlState();
-  const {loading,error,data:urls,fn:fnUrls}=useFetch(getUrls,user?.id);
+  const { user } = urlState();
+  const { loading, error, data: urls, fn: fnUrls } = useFetch(getUrls, user?.id);
+  const { loading: loadingClicks, data: clicks, fn: fnClicks } = useFetch(getClicksForUrl, urls?.map((url) => url.id));
+
+  useEffect(()=>{
+    fnUrls()
+  },[]);
+
+  useEffect(()=>{
+    if(urls?.length) fnClicks()
+  },[urls?.length]);
+
+  const filteredUrls=urls?.filter((url)=>
+  url.title.toLowerCase().includes(searchQuery.toLowerCase()));
 
   return (
     <div className='flex flex-col gap-8'>
-      {true && <BarLoader width={"100%"} color="#36d7b7" />}
+      {loading || loadingClicks && <BarLoader width={"100%"} color="#36d7b7" />}
       <div className='grid grid-cols-2 gap-4'>
-      <Card>
-        <CardHeader>
-          <CardTitle>Links Created</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>0</p>
-        </CardContent>
-      </Card>
-      <Card>
-        <CardHeader>
-          <CardTitle>Total Clicks</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>0</p>
-        </CardContent>
-      </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>Links Created</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p>0</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>Total Clicks</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p>0</p>
+          </CardContent>
+        </Card>
       </div>
       <div className='flex justify-between'>
         <h1 className='text-4xl font-extrabold'>
@@ -49,12 +63,12 @@ const Dashboard = () => {
         <Button>Create Link</Button>
       </div>
       <div className='relative'>
-        <Input type='text' placeholder='Filter Links' value ={searchQuery} 
-        onChange={(e)=>setSearchQuery(e.target.value)}
+        <Input type='text' placeholder='Filter Links' value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
         />
-        <Filter className='absolute top-2 right-2 p-1'/>
+        <Filter className='absolute top-2 right-2 p-1' />
       </div>
-      <Error message={error.message}/>
+     {error && <Error message={error?.message} />}
     </div>
   )
 }
