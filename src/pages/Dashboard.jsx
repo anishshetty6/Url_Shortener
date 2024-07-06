@@ -14,7 +14,7 @@ import { urlState } from '@/context'
 import { Filter } from 'lucide-react'
 import Error from '@/components/Error'
 import { getClicksForUrl } from '@/db/apiClicks'
-
+import LinkCard from '@/components/LinkCard'
 
 
 const Dashboard = () => {
@@ -24,16 +24,16 @@ const Dashboard = () => {
   const { loading, error, data: urls, fn: fnUrls } = useFetch(getUrls, user?.id);
   const { loading: loadingClicks, data: clicks, fn: fnClicks } = useFetch(getClicksForUrl, urls?.map((url) => url.id));
 
-  useEffect(()=>{
+  useEffect(() => {
     fnUrls()
-  },[]);
+  }, []);
 
-  useEffect(()=>{
-    if(urls?.length) fnClicks()
-  },[urls?.length]);
+  useEffect(() => {
+    if (urls?.length) fnClicks()
+  }, [urls?.length]);
 
-  const filteredUrls=urls?.filter((url)=>
-  url.title.toLowerCase().includes(searchQuery.toLowerCase()));
+  const filteredUrls = urls?.filter((url) =>
+    url.title.toLowerCase().includes(searchQuery.toLowerCase()));
 
   return (
     <div className='flex flex-col gap-8'>
@@ -44,7 +44,7 @@ const Dashboard = () => {
             <CardTitle>Links Created</CardTitle>
           </CardHeader>
           <CardContent>
-            <p>0</p>
+            <p>{urls?.length}</p>
           </CardContent>
         </Card>
         <Card>
@@ -52,7 +52,7 @@ const Dashboard = () => {
             <CardTitle>Total Clicks</CardTitle>
           </CardHeader>
           <CardContent>
-            <p>0</p>
+            <p>{clicks?.length}</p>
           </CardContent>
         </Card>
       </div>
@@ -68,7 +68,10 @@ const Dashboard = () => {
         />
         <Filter className='absolute top-2 right-2 p-1' />
       </div>
-     {error && <Error message={error?.message} />}
+      {error && <Error message={error?.message} />}
+      {(filteredUrls || []).map((url, i) => {
+        return <LinkCard key={i} url={url} fetchUrls={fnUrls}/>
+      })}
     </div>
   )
 }
