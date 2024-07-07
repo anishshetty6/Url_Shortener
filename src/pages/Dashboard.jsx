@@ -15,6 +15,7 @@ import { Filter } from 'lucide-react'
 import Error from '@/components/Error'
 import { getClicksForUrl } from '@/db/apiClicks'
 import LinkCard from '@/components/LinkCard'
+import CreateLink from '@/components/CreateLink'
 
 
 const Dashboard = () => {
@@ -60,7 +61,7 @@ const Dashboard = () => {
         <h1 className='text-4xl font-extrabold'>
           My Links
         </h1>
-        <Button>Create Link</Button>
+        <CreateLink />
       </div>
       <div className='relative'>
         <Input type='text' placeholder='Filter Links' value={searchQuery}
