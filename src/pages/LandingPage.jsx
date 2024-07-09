@@ -36,21 +36,21 @@ const LandingPage = () => {
       <img src="public\banner.jpeg" alt='banner' className='w-full my-10 md:px-11'></img>
       <Accordion type="multiple" collapsible className='w-full md:px-11'>
         <AccordionItem value="item-1">
-          <AccordionTrigger>How does Trimmr URL work?</AccordionTrigger>
+          <AccordionTrigger>How does Trimrr URL work?</AccordionTrigger>
           <AccordionContent>
             When you enter a long URL, our system generates a shorter version of that URL. This shortened URL redirects to the original long URL when accessed.
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-2">
-          <AccordionTrigger>Is it accessible?</AccordionTrigger>
+          <AccordionTrigger>What other things can Trimrr do?</AccordionTrigger>
           <AccordionContent>
-            Yes. It adheres to the WAI-ARIA design pattern.
+            Trimrr will generate a QR code for your link and provide statistics on it too!
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-3">
-          <AccordionTrigger>Is it accessible?</AccordionTrigger>
+          <AccordionTrigger>What kind of stats?</AccordionTrigger>
           <AccordionContent>
-            Yes. It adheres to the WAI-ARIA design pattern.
+            Stats regarding how many times the link was clicked, the location and the device of the user too!
           </AccordionContent>
         </AccordionItem>
       </Accordion>
