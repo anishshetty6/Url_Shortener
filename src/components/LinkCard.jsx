@@ -8,7 +8,7 @@ import useFetch from '@/hooks/useFetch';
 
 const LinkCard = ({ url, fetchUrls }) => {
 
-  const downloadImage = () => {
+    const downloadImage = () => {
     const imageUrl = url?.qr;
     const fileName = url?.title;
 
