@@ -8,7 +8,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { useNavigate } from 'react-router-dom'
-
+import { SparklesCore } from '@/components/ui/sparkles'
 
 
 const LandingPage = () => {
@@ -22,18 +22,29 @@ const LandingPage = () => {
 
   return (
     <div className='flex flex-col items-center'>
+       <div className="w-full absolute inset-0 h-screen -z-10">
+        <SparklesCore
+          id="tsparticlesfullpage"
+          background="transparent"
+          minSize={0.6}
+          maxSize={1.4}
+          particleDensity={100}
+          className="w-full h-full"
+          particleColor="#FFFFFF"
+        />
+      </div>
       <h2 className='my-10 sm:my-16 text-3xl sm:text-6xl lg:text-7xl text-white text-center font-extrabold'>The only URL Shortener <br />that you'll ever need! 👇</h2>
-      <form className='sm:h-14 flex flex-col sm:flex-row w-full md:w-2/4 gap-2'
+      <form className='sm:h-14 flex flex-col sm:flex-row w-full md:w-2/4 gap-2 z-10'
       onSubmit={handleShorten}
       >
         <Input type='url' placeholder='Enter your long URL'
           value={longUrl}
           onChange={(e) => { setLongUrl(e.target.value) }}
-          className=' flex-1 p-4'
+          className=' flex-1 p-4 z-10'
         />
-        <Button className='' type='submit' variant="destructive">Shorten</Button>
+        <Button className='z-10' type='submit' variant="destructive">Shorten</Button>
       </form>
-      <img src="public\banner.jpeg" alt='banner' className='w-full my-10 md:px-11'></img>
+      <img src="public\banner.jpeg" alt='banner' className='w-full my-10 md:px-11 z-10'></img>
       <Accordion type="multiple" collapsible className='w-full md:px-11'>
         <AccordionItem value="item-1">
           <AccordionTrigger>How does Trimrr URL work?</AccordionTrigger>
